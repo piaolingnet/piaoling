@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.piaoling.dao.NewsMapper" >
+  <resultMap id="BaseResultMap" type="com.piaoling.entity.News" >
+    <id column="NEWS_ID" property="newsId" jdbcType="VARCHAR" />
+    <result column="NEWS_TITLE" property="newsTitle" jdbcType="VARCHAR" />
+    <result column="NEWS_TYPE" property="newsType" jdbcType="CHAR" />
+    <result column="PUBLISH_DATE" property="publishDate" jdbcType="TIMESTAMP" />
+    <result column="NEWS_SOURCE" property="newsSource" jdbcType="VARCHAR" />
+    <result column="PARENT_COLUMN" property="parentColumn" jdbcType="VARCHAR" />
+    <result column="KEYWORDS" property="keywords" jdbcType="VARCHAR" />
+    <result column="RELEVANT_NEWS" property="relevantNews" jdbcType="VARCHAR" />
+    <result column="IS_COMMENT" property="isComment" jdbcType="CHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.piaoling.entity.News" extends="BaseResultMap" >
+    <result column="NEWS_CONTENT" property="newsContent" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    NEWS_ID, NEWS_TITLE, NEWS_TYPE, PUBLISH_DATE, NEWS_SOURCE, PARENT_COLUMN, KEYWORDS, 
+    RELEVANT_NEWS, IS_COMMENT
+  </sql>
+  <sql id="Blob_Column_List" >
+    NEWS_CONTENT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from NEWS
+    where NEWS_ID = #{newsId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from NEWS
+    where NEWS_ID = #{newsId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.piaoling.entity.News" useGeneratedKeys="true" keyProperty="NEWS_ID">
+    insert into NEWS (NEWS_ID, NEWS_TITLE, NEWS_TYPE, 
+      PUBLISH_DATE, NEWS_SOURCE, PARENT_COLUMN, 
+      KEYWORDS, RELEVANT_NEWS, IS_COMMENT, 
+      NEWS_CONTENT)
+    values (#{newsId,jdbcType=VARCHAR}, #{newsTitle,jdbcType=VARCHAR}, #{newsType,jdbcType=CHAR}, 
+      #{publishDate,jdbcType=TIMESTAMP}, #{newsSource,jdbcType=VARCHAR}, #{parentColumn,jdbcType=VARCHAR}, 
+      #{keywords,jdbcType=VARCHAR}, #{relevantNews,jdbcType=VARCHAR}, #{isComment,jdbcType=CHAR}, 
+      #{newsContent,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.piaoling.entity.News" >
+    insert into NEWS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="newsId != null" >
+        NEWS_ID,
+      </if>
+      <if test="newsTitle != null" >
+        NEWS_TITLE,
+      </if>
+      <if test="newsType != null" >
+        NEWS_TYPE,
+      </if>
+      <if test="publishDate != null" >
+        PUBLISH_DATE,
+      </if>
+      <if test="newsSource != null" >
+        NEWS_SOURCE,
+      </if>
+      <if test="parentColumn != null" >
+        PARENT_COLUMN,
+      </if>
+      <if test="keywords != null" >
+        KEYWORDS,
+      </if>
+      <if test="relevantNews != null" >
+        RELEVANT_NEWS,
+      </if>
+      <if test="isComment != null" >
+        IS_COMMENT,
+      </if>
+      <if test="newsContent != null" >
+        NEWS_CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="newsId != null" >
+        #{newsId,jdbcType=VARCHAR},
+      </if>
+      <if test="newsTitle != null" >
+        #{newsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="newsType != null" >
+        #{newsType,jdbcType=CHAR},
+      </if>
+      <if test="publishDate != null" >
+        #{publishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newsSource != null" >
+        #{newsSource,jdbcType=VARCHAR},
+      </if>
+      <if test="parentColumn != null" >
+        #{parentColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null" >
+        #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="relevantNews != null" >
+        #{relevantNews,jdbcType=VARCHAR},
+      </if>
+      <if test="isComment != null" >
+        #{isComment,jdbcType=CHAR},
+      </if>
+      <if test="newsContent != null" >
+        #{newsContent,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.piaoling.entity.News" >
+    update NEWS
+    <set >
+      <if test="newsTitle != null" >
+        NEWS_TITLE = #{newsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="newsType != null" >
+        NEWS_TYPE = #{newsType,jdbcType=CHAR},
+      </if>
+      <if test="publishDate != null" >
+        PUBLISH_DATE = #{publishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newsSource != null" >
+        NEWS_SOURCE = #{newsSource,jdbcType=VARCHAR},
+      </if>
+      <if test="parentColumn != null" >
+        PARENT_COLUMN = #{parentColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null" >
+        KEYWORDS = #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="relevantNews != null" >
+        RELEVANT_NEWS = #{relevantNews,jdbcType=VARCHAR},
+      </if>
+      <if test="isComment != null" >
+        IS_COMMENT = #{isComment,jdbcType=CHAR},
+      </if>
+      <if test="newsContent != null" >
+        NEWS_CONTENT = #{newsContent,jdbcType=CLOB},
+      </if>
+    </set>
+    where NEWS_ID = #{newsId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.piaoling.entity.News" >
+    update NEWS
+    set NEWS_TITLE = #{newsTitle,jdbcType=VARCHAR},
+      NEWS_TYPE = #{newsType,jdbcType=CHAR},
+      PUBLISH_DATE = #{publishDate,jdbcType=TIMESTAMP},
+      NEWS_SOURCE = #{newsSource,jdbcType=VARCHAR},
+      PARENT_COLUMN = #{parentColumn,jdbcType=VARCHAR},
+      KEYWORDS = #{keywords,jdbcType=VARCHAR},
+      RELEVANT_NEWS = #{relevantNews,jdbcType=VARCHAR},
+      IS_COMMENT = #{isComment,jdbcType=CHAR},
+      NEWS_CONTENT = #{newsContent,jdbcType=CLOB}
+    where NEWS_ID = #{newsId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.piaoling.entity.News" >
+    update NEWS
+    set NEWS_TITLE = #{newsTitle,jdbcType=VARCHAR},
+      NEWS_TYPE = #{newsType,jdbcType=CHAR},
+      PUBLISH_DATE = #{publishDate,jdbcType=TIMESTAMP},
+      NEWS_SOURCE = #{newsSource,jdbcType=VARCHAR},
+      PARENT_COLUMN = #{parentColumn,jdbcType=VARCHAR},
+      KEYWORDS = #{keywords,jdbcType=VARCHAR},
+      RELEVANT_NEWS = #{relevantNews,jdbcType=VARCHAR},
+      IS_COMMENT = #{isComment,jdbcType=CHAR}
+    where NEWS_ID = #{newsId,jdbcType=VARCHAR}
+  </update>
+</mapper>

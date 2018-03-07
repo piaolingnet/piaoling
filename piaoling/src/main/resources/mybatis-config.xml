@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+    	<!-- 字段有null时也调用 setter,适应于返回Map,3.2版本以上可用 --> 
+        <setting name="callSettersOnNulls" value="true"/>
+        <!-- 使用驼峰命名法转换字段。 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <!--<typeAliases>-->
+        <!--&lt;!&ndash; typeAliasesr的配置在spring/spring-dataSource.xml中,  p:typeAliasesPackage="com.nxin.nxxy.**.bo" &ndash;&gt;-->
+    <!--</typeAliases>-->
+   <!--  <typeHandlers>
+        <typeHandler javaType="Boolean" jdbcType="CHAR" handler="com.nxin.nxxy.common.mybatis.hander.BooleanTypeHandler"/>
+    </typeHandlers> -->
+
+</configuration>  
