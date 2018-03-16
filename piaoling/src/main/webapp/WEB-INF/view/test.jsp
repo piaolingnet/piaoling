@@ -5,6 +5,6 @@
     <title>测试</title>
 </head>
 <body class="body">
-<h1>hello my first maven webproject</h1>
+<h1>hello my first maven webproject!</h1>
 </body>
 </html>
