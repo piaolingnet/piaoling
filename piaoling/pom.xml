@@ -1,6 +1,27 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
+<!--  
+该例配置中的releases和snapshots元素比较重要，它们用来控制Maven对于发布版构件和快照版构件的下载。
+该例中releases的enabled值为true，表示开启maven仓库的发布版本下载支持，而snapshots的enabled值为false，
+表示关闭maven仓库的快照版本的下载支持。该例中的layout元素值default表示仓库的布局是Maven2及Maven3的默认布局，而不是Maven1的布局。
+-->
+	<repositories>
+		<repository>
+			<!-- Maven 自带的中央仓库使用的Id为central 如果其他的仓库声明也是用该Id 就会覆盖中央仓库的配置 -->
+			<id>central</id>
+			<name>aliyun-repository</name>
+			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+			<layout>default</layout>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.yiye</groupId>
 	<artifactId>piaoling</artifactId>
@@ -16,14 +37,14 @@
 
 	<dependencies>
 		<dependency>
-		  <groupId>Junit</groupId>
-		  <artifactId>junit</artifactId>
-		  <version>4.12</version>
+			<groupId>Junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-test</artifactId>
-		    <version>${spring.version}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -52,9 +73,9 @@
 			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
-		  <groupId>com.jslsolucoes</groupId>
-		  <artifactId>ojdbc6</artifactId>
-		  <version>11.2.0.1.0</version>
+			<groupId>com.jslsolucoes</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -155,26 +176,26 @@
 			<artifactId>spring-tx</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
+
 		<dependency>
-			  <groupId>org.aspectj</groupId>
-			  <artifactId>aspectjweaver</artifactId>
-			  <version>1.8.13</version>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.8.13</version>
 		</dependency>
-		
-		<!--Redis依赖  -->
+
+		<!--Redis依赖 -->
 		<dependency>
-		  <groupId>org.springframework.data</groupId>
-		  <artifactId>spring-data-Redis</artifactId>
-		  <version>1.0.3.RELEASE</version>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-Redis</artifactId>
+			<version>1.0.3.RELEASE</version>
 		</dependency>
-		
+
 		<dependency>
-		  <groupId>redis.clients</groupId>
-		  <artifactId>jedis</artifactId>
-		  <version>2.1.0</version>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.1.0</version>
 		</dependency>
-		
+
 	</dependencies>
 
 	<build>
