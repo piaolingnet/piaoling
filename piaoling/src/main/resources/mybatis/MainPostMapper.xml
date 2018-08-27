@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.piaoling.dao.MainPostDao" >
+  <resultMap id="BaseResultMap" type="com.piaoling.entity.MainPost" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="block_id" property="blockId" jdbcType="INTEGER" />
+    <result column="reply_num" property="replyNum" jdbcType="INTEGER" />
+    <result column="last_reply_time" property="lastReplyTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.piaoling.entity.MainPost" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, user_id, block_id, reply_num, last_reply_time, status
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from main_post
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from main_post
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.piaoling.entity.MainPost" >
+    insert into main_post (id, title, user_id, 
+      block_id, reply_num, last_reply_time, 
+      status, content)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{blockId,jdbcType=INTEGER}, #{replyNum,jdbcType=INTEGER}, #{lastReplyTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.piaoling.entity.MainPost" >
+    insert into main_post
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="blockId != null" >
+        block_id,
+      </if>
+      <if test="replyNum != null" >
+        reply_num,
+      </if>
+      <if test="lastReplyTime != null" >
+        last_reply_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="blockId != null" >
+        #{blockId,jdbcType=INTEGER},
+      </if>
+      <if test="replyNum != null" >
+        #{replyNum,jdbcType=INTEGER},
+      </if>
+      <if test="lastReplyTime != null" >
+        #{lastReplyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.piaoling.entity.MainPost" >
+    update main_post
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="blockId != null" >
+        block_id = #{blockId,jdbcType=INTEGER},
+      </if>
+      <if test="replyNum != null" >
+        reply_num = #{replyNum,jdbcType=INTEGER},
+      </if>
+      <if test="lastReplyTime != null" >
+        last_reply_time = #{lastReplyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.piaoling.entity.MainPost" >
+    update main_post
+    set title = #{title,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      block_id = #{blockId,jdbcType=INTEGER},
+      reply_num = #{replyNum,jdbcType=INTEGER},
+      last_reply_time = #{lastReplyTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.piaoling.entity.MainPost" >
+    update main_post
+    set title = #{title,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      block_id = #{blockId,jdbcType=INTEGER},
+      reply_num = #{replyNum,jdbcType=INTEGER},
+      last_reply_time = #{lastReplyTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

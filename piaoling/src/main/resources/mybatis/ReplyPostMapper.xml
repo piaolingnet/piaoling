@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.piaoling.dao.ReplyPostDao" >
+  <resultMap id="BaseResultMap" type="com.piaoling.entity.ReplyPost" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="p_id" property="pId" jdbcType="INTEGER" />
+    <result column="main_id" property="mainId" jdbcType="INTEGER" />
+    <result column="reply_time" property="replyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.piaoling.entity.ReplyPost" extends="BaseResultMap" >
+    <result column="reply_content" property="replyContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, p_id, main_id, reply_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    reply_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from reply_post
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from reply_post
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.piaoling.entity.ReplyPost" >
+    insert into reply_post (id, user_id, p_id, 
+      main_id, reply_time, reply_content
+      )
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{pId,jdbcType=INTEGER}, 
+      #{mainId,jdbcType=INTEGER}, #{replyTime,jdbcType=TIMESTAMP}, #{replyContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.piaoling.entity.ReplyPost" >
+    insert into reply_post
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="pId != null" >
+        p_id,
+      </if>
+      <if test="mainId != null" >
+        main_id,
+      </if>
+      <if test="replyTime != null" >
+        reply_time,
+      </if>
+      <if test="replyContent != null" >
+        reply_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="pId != null" >
+        #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="mainId != null" >
+        #{mainId,jdbcType=INTEGER},
+      </if>
+      <if test="replyTime != null" >
+        #{replyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replyContent != null" >
+        #{replyContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.piaoling.entity.ReplyPost" >
+    update reply_post
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="pId != null" >
+        p_id = #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="mainId != null" >
+        main_id = #{mainId,jdbcType=INTEGER},
+      </if>
+      <if test="replyTime != null" >
+        reply_time = #{replyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replyContent != null" >
+        reply_content = #{replyContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.piaoling.entity.ReplyPost" >
+    update reply_post
+    set user_id = #{userId,jdbcType=INTEGER},
+      p_id = #{pId,jdbcType=INTEGER},
+      main_id = #{mainId,jdbcType=INTEGER},
+      reply_time = #{replyTime,jdbcType=TIMESTAMP},
+      reply_content = #{replyContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.piaoling.entity.ReplyPost" >
+    update reply_post
+    set user_id = #{userId,jdbcType=INTEGER},
+      p_id = #{pId,jdbcType=INTEGER},
+      main_id = #{mainId,jdbcType=INTEGER},
+      reply_time = #{replyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
