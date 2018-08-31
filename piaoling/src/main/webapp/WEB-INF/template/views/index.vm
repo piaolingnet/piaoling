@@ -1,0 +1,4 @@
+#set($layout="layout/default_layout.vm")
+<div>
+	哈哈哈哈哈
+</div>

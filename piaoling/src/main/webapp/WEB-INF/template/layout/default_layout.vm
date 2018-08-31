@@ -1,0 +1,10 @@
+<!doctype html>
+<html dir="ltr" lang="zh-CN" >
+<body>  
+            #parse("/common/header.vm")  
+            <div class="layui-container fly-marginTop">
+                    $screen_content  
+             </div>
+            #parse("common/footer.vm")  
+</body> 
+</html>
