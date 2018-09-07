@@ -27,6 +27,6 @@ public class Test1 {
     
     @RequestMapping("/index")
     public String getindex(HttpServletRequest request){
-        return "index";
+        return "index/index";
     }
 }

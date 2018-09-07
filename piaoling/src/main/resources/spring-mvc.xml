@@ -140,7 +140,7 @@
     <mvc:default-servlet-handler />
 
     <!-- 对静态资源文件的访问 方案二 （二选一） -->
-     <mvc:resources mapping="/static/**" location="/resources/static/" cache-period="31556926"/>
+    <!-- <mvc:resources mapping="/static/**" location="/resources/static/" /> -->
     <!--mvc自动解析文件配置-->
     <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
